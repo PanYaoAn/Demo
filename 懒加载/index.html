@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <div class="content">
+        <div class="content-img">
+            <img class="lazyimg" data-src="./image/天秤座on.png" alt="">
+
+        </div>
+        <div class="content-img">
+            <img class="lazyimg" data-src="./image/天蝎座.png" alt="">
+
+        </div>
+        <div class="content-img">
+            <img class="lazyimg" data-src="./image/天蝎座on.png" alt="">
+
+        </div>
+
+    </div>
+</body>
+
+</html>
+<style>
+    .content-img {
+        height: 500px;
+    }
+    
+    .lazyimg {
+        width: 50%;
+        opacity: 0;
+        transform: translateX(50%);
+        transition: all 1s;
+    }
+    
+    .fade {
+        transform: translateX(0);
+        opacity: 1;
+        transition: all 1s;
+    }
+</style>
+<script>
+    $(window).scroll(handleScroll)
+        // const con = document.querySelector('.content')
+
+    function handleScroll() {
+        let imgs = $('img[data-src]')
+
+        // 滚动高度
+        let bodyScrollHeight = document.body.scrollTop || document.documentElement.scrollTop
+            // 当前窗口高度
+        let windowHeight = window.innerHeight;
+        for (let i = 0; i < imgs.length; i++) {
+            let imgHeight = $(imgs[i]).offset().top
+                // console.log(bodyScrollHeight, windowHeight)
+                // console.log(imgHeight)
+            if (imgHeight < windowHeight + bodyScrollHeight && imgHeight >= bodyScrollHeight) {
+
+                // setTimeout(() => {
+                // imgs[i].src = imgs[i]
+
+                $(imgs).eq(i).attr('src', $(imgs).eq(i).attr('data-src'))
+                $(imgs).eq(i).attr('class', 'fade')
+
+                // }, 10)
+            }
+        }
+    }
+</script>
